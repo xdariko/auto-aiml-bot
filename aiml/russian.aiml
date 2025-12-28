@@ -1,0 +1,498 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<aiml>
+	<category>
+		<pattern>INIT</pattern>
+		<template>
+			<think>
+				<set name="username">друг</set>
+				<set name="last_car">unknown</set>
+			</think>
+		</template>
+	</category>
+
+	<category>
+		<pattern>СТАРТ</pattern>
+		<template>
+			<srai>INIT</srai>
+		</template>
+	</category>
+	
+	<category>
+		<pattern>НАЧАТЬ</pattern>
+		<template>
+			<srai>INIT</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>ПРИВЕТ</pattern>
+		<template>
+			<srai>INIT</srai>Привет, <get name="username"/>! Про какую марку поговорим?
+		</template>
+	</category>
+
+	<category><pattern>БОТ *</pattern><template><sr/></template></category>
+	<category><pattern>А *</pattern><template><sr/></template></category>
+	<category><pattern>НУ *</pattern><template><sr/></template></category>
+	<category><pattern>СЛУШАЙ *</pattern><template><sr/></template></category>
+
+	<category>
+		<pattern>_ МЕНЯ ЗОВУТ *</pattern>
+		<template>
+			<srai>
+				МЕНЯ ЗОВУТ <star/>
+			</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>МЕНЯ ЗОВУТ *</pattern>
+		<template>
+			<think>
+				<set name="username">
+					<star/>
+				</set>
+			</think>
+			<random>
+				<li>
+					О, новое лицо! Приветствую, <get name="username"/>! Я бот-автоманьяк.
+				</li>
+				<li>
+					Здравствуй, <get name="username"/>! Готов поговорить о железных конях?
+				</li>
+				<li>
+					Добро пожаловать в автомир, <get name="username"/>!
+				</li>
+			</random>
+		</template>
+	</category>
+
+
+	<category>
+		<pattern>КАК ДЕЛА</pattern>
+		<template>
+			<random>
+				<li>У меня всё чудесно. Спасибо, что интересуешься.</li>
+				<li>Пушка. Давай марку — накину фактов.</li>
+
+				<li>
+					<condition name="last_car">
+						<li value="unknown">Нормально!</li>
+						<li>
+							Нормально! Кстати, мы же про <get name="last_car"/> говорили — хочешь ещё факт?
+						</li>
+					</condition>
+				</li>
+			</random>
+		</template>
+	</category>
+	
+	<category><pattern>КАК ОНО</pattern><template><srai>КАК ДЕЛА</srai></template></category>
+	<category><pattern>КАК ТЫ</pattern><template><srai>КАК ДЕЛА</srai></template></category>
+	<category><pattern>КАК ЖИЗНЬ</pattern><template><srai>КАК ДЕЛА</srai></template></category>
+	<category><pattern>ЧТО НОВОГО</pattern><template><srai>КАК ДЕЛА</srai></template></category>
+
+
+	<category>
+		<pattern>У МЕНЯ ЕСТЬ ВОПРОС</pattern>
+		<template>С удовольствием отвечу. А в чём, собственно, вопрос?</template>
+	</category>
+
+	<category><pattern>ОТВЕТЬ</pattern><template><srai>У МЕНЯ ЕСТЬ ВОПРОС</srai></template></category>
+	<category><pattern>ОТВЕТЬ НА МОЙ ВОПРОС</pattern><template><srai>У МЕНЯ ЕСТЬ ВОПРОС</srai></template></category>
+	<category><pattern>ДАЙ МНЕ ОТВЕТ</pattern><template><srai>У МЕНЯ ЕСТЬ ВОПРОС</srai></template></category>
+	<category><pattern>МОЖЕШЬ ОТВЕТИТЬ</pattern><template><srai>У МЕНЯ ЕСТЬ ВОПРОС</srai></template></category>
+	
+	<category>
+		<pattern>КТО ТЫ</pattern>
+		<template>
+			<random>
+				<li>Я виртуальный механик автомобилей, <get name="username"/>! Особенно люблю Citroen, Chevrolet, Dodge, Hyundai, Lada, Mitsubishi, Maserati, Opel, Renault и Tesla.</li>
+				<li>Просто бот, который знает, что под капотом. Чем могу помочь, <get name="username"/>?</li>
+				<li>Я бот, который не спорит, а раздаёт факты про тачки, <get name="username"/></li>
+			</random>
+		</template>
+	</category>
+
+	<category><pattern>ТЫ КТО</pattern><template><srai>КТО ТЫ</srai>л</template></category>
+	<category><pattern>РАССКАЖИ О СЕБЕ</pattern><template><srai>КТО ТЫ</srai>л</template></category>
+	<category><pattern>ПРЕДСТАВЬСЯ</pattern><template><srai>КТО ТЫ</srai>л</template></category>
+	<category><pattern>ТЫ ЧТО ЗА БОТ</pattern><template><srai>КТО ТЫ</srai>л</template></category>
+	
+	<category>
+		<pattern>ВОЗМОЖНОСТИ</pattern>
+		<template>
+			Я могу рассказать кучу интересного о 10 марках:
+			Citroen, Chevrolet, Dodge, Hyundai, Lada, Mitsubishi, Maserati, Opel, Renault, Tesla.
+			Спроси: "Что такое Tesla?" или "Расскажи про Lada".
+		</template>
+	</category>
+
+	<category><pattern>ЧТО ТЫ УМЕЕШЬ</pattern><template><srai>ВОЗМОЖНОСТИ</srai>л</template></category>
+	<category><pattern>ЧТО ТЫ МОЖЕШЬ</pattern><template><srai>ВОЗМОЖНОСТИ</srai>л</template></category>
+	<category><pattern>ХЕЛП</pattern><template><srai>ВОЗМОЖНОСТИ</srai>л</template></category>
+	<category><pattern>КОМАНДЫ</pattern><template><srai>ВОЗМОЖНОСТИ</srai>л</template></category>
+	<category><pattern>ЧТО СПРОСИТЬ</pattern><template><srai>ВОЗМОЖНОСТИ</srai>л</template></category>
+	
+	<category>
+		<pattern>СПИСОК МАРОК</pattern>
+		<template>
+			Мой "гараж" знаний: Citroen, Chevrolet, Dodge, Hyundai, Lada, Mitsubishi, Maserati, Opel, Renault, Tesla.
+			Про какую марку хочешь факт?
+		</template>
+	</category>
+
+	<category><pattern>КАКИЕ МАРКИ * ЗНАЕШЬ</pattern><template><srai>СПИСОК МАРОК</srai></template></category>
+	<category><pattern>ЗА ЧТО ШАРИШЬ</pattern><template><srai>СПИСОК МАРОК</srai></template></category>
+	<category><pattern>ПЕРЕЧИСЛИ МАРКИ</pattern><template><srai>СПИСОК МАРОК</srai></template></category>
+	<category><pattern>КАКИЕ АВТО * ЗНАЕШЬ</pattern><template><srai>СПИСОК МАРОК</srai></template></category>
+	<category><pattern>МАРКИ</pattern><template><srai>СПИСОК МАРОК</srai></template></category>
+	<category><pattern>СПИСОК</pattern><template><srai>СПИСОК МАРОК</srai></template></category>
+	
+	<category>
+		<pattern>ТЕКУЩАЯ МАРКА</pattern>
+		<template>
+			<condition name="last_car">
+				<li value="unknown">Мы пока не выбрали марку. Спроси про любую из моих 10 марок.</li>
+				<li>Мы говорим о <get name="last_car"/>.</li>
+			</condition>
+		</template>
+	</category>
+	
+	<category><pattern>О ЧЕМ РЕЧЬ</pattern><template><srai>ТЕКУЩАЯ МАРКА</srai></template></category>
+	<category><pattern>О ЧЕМ * ГОВОРИ*</pattern><template><srai>ТЕКУЩАЯ МАРКА</srai></template></category>
+	<category><pattern>О ЧЕМ *</pattern><template><srai>ТЕКУЩАЯ МАРКА</srai></template></category>
+	<category><pattern>ПРО ЧТО * ГОВОРИ*</pattern><template><srai>ТЕКУЩАЯ МАРКА</srai></template></category>
+	<category><pattern>ПРО ЧТО *</pattern><template><srai>ТЕКУЩАЯ МАРКА</srai></template></category>
+	<category><pattern>КАКУЮ МАРКУ ОБСУЖДАЕМ</pattern><template><srai>ТЕКУЩАЯ МАРКА</srai></template></category>
+	<category><pattern>ЧТО * ЗА МАРКА</pattern><template><srai>ТЕКУЩАЯ МАРКА</srai></template></category>
+
+	<category>
+		<pattern>CITROEN</pattern>
+		<template>
+			<think>
+				<set name="last_car">Citroen</set>
+			</think>
+			<random>
+				<li>Citroen — французская марка, известная своей любовью к необычным решениям. Основана в 1919 году. Двойной шеврон на логотипе отсылает к шестерёнкам: Андре Ситроен начинал с производства зубчатых передач.</li>
+				<li>Citroen прославились комфортом: легендарная DS (1955) с гидропневматической подвеской могла менять клиренс и “плыть” по дороге. Её прозвали “Богиней” из-за игры слов DS → Déesse.</li>
+			</random>
+		</template>
+	</category>
+	
+	<category><pattern>СИТРОЕН</pattern><template><srai>CITROEN</srai></template></category>	
+	<category><pattern>_ СИТРОЕН</pattern><template><srai>CITROEN</srai></template></category>	
+	<category><pattern>_ CITROEN</pattern><template><srai>CITROEN</srai></template></category>
+	
+	<category>
+		<pattern>CHEVROLET</pattern>
+		<template>
+			<think>
+				<set name="last_car">Chevrolet</set>
+			</think>
+			<random>
+				<li>Chevrolet — американская марка, основанная в 1911 году Луи Шевроле и Уильямом Дюрантом. Это один из ключевых брендов GM и символ “массовой Америки” на колёсах.</li>
+				<li>Chevrolet — это и рабочие пикапы, и спорткары. Corvette (с 1953) стал иконой, а Camaro (с 1967) — вечный соперник Mustang.</li>
+			</random>
+		</template>
+	</category>
+	
+	<category><pattern>ШЕВРОЛЕ</pattern><template><srai>CHEVROLET</srai></template></category>	
+	<category><pattern>_ ШЕВРОЛЕ</pattern><template><srai>CHEVROLET</srai></template></category>	
+	<category><pattern>_ CHEVROLET</pattern><template><srai>CHEVROLET</srai></template></category>
+    
+	<category>
+		<pattern>DODGE</pattern>
+		<template>
+			<think>
+				<set name="last_car">Dodge</set>
+			</think>
+			<random>
+				<li>Dodge — про мощь и характер. Компания выросла из бизнеса братьев Додж и стала известна своими “мускул-карами” и агрессивным стилем.</li>
+				<li>Dodge ассоциируется с Charger/Challenger и V8. Это марка, где “громко” — не недостаток, а фирменный стиль.</li>
+			</random>
+		</template>
+	</category>
+	
+	<category><pattern>ДОДЖ</pattern><template><srai>DODGE</srai></template></category>	
+	<category><pattern>_ ДОДЖ</pattern><template><srai>DODGE</srai></template></category>	
+	<category><pattern>_ DODGE</pattern><template><srai>DODGE</srai></template></category>
+    
+	<category>
+		<pattern>HYUNDAI</pattern>
+		<template>
+			<think>
+				<set name="last_car">Hyundai</set>
+			</think>
+			<random>
+				<li>Hyundai — южнокорейская марка, начавшая автопроизводство в 1967. Логотип “H” часто трактуют как рукопожатие компании и клиента.</li>
+				<li>Hyundai прошли путь от “простых” машин до технологичных моделей и электромобилей. Сейчас это один из крупнейших автопроизводителей мира.</li>
+			</random>
+		</template>
+	</category>
+	
+	<category><pattern>ХЕНДАЙ</pattern><template><srai>HYUNDAI</srai></template></category>	
+	<category><pattern>_ ХЕНДАЙ</pattern><template><srai>HYUNDAI</srai></template></category>	
+	<category><pattern>_ HYUNDAI</pattern><template><srai>HYUNDAI</srai></template></category>
+    
+	<category>
+		<pattern>LADA</pattern>
+		<template>
+			<think>
+				<set name="last_car">Lada</set>
+			</think>
+			<random>
+				<li>Lada (ВАЗ) — символ “простого и ремонтопригодного”. Массовая история началась в 1970-х, а ВАЗ-2101 стал “народным” автомобилем.</li>
+				<li>Lada известна выносливостью и простотой конструкции. А “Нива” (с 1977) стала легендой среди компактных внедорожников.</li>
+			</random>
+		</template>
+	</category>
+
+	<category><pattern>ЛАДА</pattern><template><srai>LADA</srai></template></category>	
+	<category><pattern>_ ЛАДА</pattern><template><srai>LADA</srai></template></category>	
+	<category><pattern>_ LADA</pattern><template><srai>LADA</srai></template></category>
+    
+	<category>
+		<pattern>MITSUBISHI</pattern>
+		<template>
+			<think>
+				<set name="last_car">Mitsubishi</set>
+			</think>
+			<random>
+				<li>Mitsubishi — японский концерн с логотипом “три алмаза”. Автомобили делают давно, а в мире спорта марку прославили раллийные модели и полный привод.</li>
+				<li>Mitsubishi — это Pajero/Montero, Lancer Evolution и инженерные решения вроде MIVEC (изменение фаз). Марка любит практичность и выносливость.</li>
+			</random>
+		</template>
+	</category>
+
+	<category><pattern>МИСУБИСИ</pattern><template><srai>MITSUBISHI</srai></template></category>	
+	<category><pattern>_ МИСУБИСИ</pattern><template><srai>MITSUBISHI</srai></template></category>	
+	<category><pattern>МИЦУБИСИ</pattern><template><srai>MITSUBISHI</srai></template></category>	
+	<category><pattern>_ МИЦУБИСИ</pattern><template><srai>MITSUBISHI</srai></template></category>	
+	<category><pattern>МИТСУБИСИ</pattern><template><srai>MITSUBISHI</srai></template></category>	
+	<category><pattern>_ МИТСУБИСИ</pattern><template><srai>MITSUBISHI</srai></template></category>	
+	<category><pattern>_ MITSUBISHI</pattern><template><srai>MITSUBISHI</srai></template></category>
+    
+	<category>
+		<pattern>MASERATI</pattern>
+		<template>
+			<think>
+				<set name="last_car">Maserati</set>
+			</think>
+			<random>
+				<li>Maserati — итальянская марка роскоши и скорости, основана в 1914. Эмблема — трезубец, вдохновлённый символикой Болоньи.</li>
+				<li>Maserati — это стиль, статус и спортивные корни. Многие модели носят “ветряные” имена: Ghibli, Bora, Mistral.</li>
+			</random>
+		</template>
+	</category>
+	
+	<category><pattern>МАЗЕРАТИ</pattern><template><srai>MASERATI</srai></template></category>	
+	<category><pattern>_ МАЗЕРАТИ</pattern><template><srai>MASERATI</srai></template></category>	
+	<category><pattern>_ MASERATI</pattern><template><srai>MASERATI</srai></template></category>	
+	
+	<category>
+		<pattern>OPEL</pattern>
+		<template>
+			<think>
+				<set name="last_car">Opel</set>
+			</think>
+			<random>
+				<li>Opel — немецкая марка с длинной историей: начинали с швейных машин и велосипедов, а затем пришли в автопром. Символ — молния в круге.</li>
+				<li>Opel — это “прагматичные немцы”: Astra, Corsa и другие массовые модели, которые ценят за понятную конструкцию и баланс цены/комфорта.</li>
+			</random>
+		</template>
+	</category>
+	
+	<category><pattern>ОПЕЛЬ</pattern><template><srai>OPEL</srai></template></category>	
+	<category><pattern>_ ОПЕЛЬ</pattern><template><srai>OPEL</srai></template></category>	
+	<category><pattern>ОПЕЛ</pattern><template><srai>OPEL</srai></template></category>	
+	<category><pattern>_ ОПЕЛ</pattern><template><srai>OPEL</srai></template></category>	
+	<category><pattern>_ OPEL</pattern><template><srai>OPEL</srai></template></category>	
+	
+	<category>
+		<pattern>RENAULT</pattern>
+		<template>
+			<think>
+				<set name="last_car">Renault</set>
+			</think>
+			<random>
+				<li>Renault — французская марка, основанная в 1899. Делает всё: от городских малолитражек до коммерческого транспорта и электромобилей.</li>
+				<li>Renault известны практичными решениями для семьи и города, а ещё у них сильные спортивные страницы истории, включая автоспорт и “заряженные” версии.</li>
+			</random>
+		</template>
+	</category>
+	
+	<category><pattern>РЕНО</pattern><template><srai>RENAULT</srai></template></category>	
+	<category><pattern>_ РЕНО</pattern><template><srai>RENAULT</srai></template></category>	
+	<category><pattern>_ RENAULT</pattern><template><srai>RENAULT</srai></template></category>	
+	
+	<category>
+		<pattern>TESLA</pattern>
+		<template>
+			<think>
+				<set name="last_car">Maserati</set>
+			</think>
+			<random>
+				<li>Tesla — компания, которая сделала электромобили “мейнстримом”. Основана в 2003, а одним из первых громких проектов стал Roadster (2008), показавший, что электрокар может быть быстрым и дальнобойным.</li>
+				<li>Tesla — это не только машины, но и экосистема: зарядная инфраструктура, батареи и решения для хранения энергии. Компания также публично обещала не использовать патенты “как оружие” против тех, кто добросовестно развивает электромобили.</li>
+			</random>
+		</template>
+	</category>
+
+	<category><pattern>ТЕСЛА</pattern><template><srai>TESLA</srai></template></category>	
+	<category><pattern>_ ИЛОН МАСК</pattern><template><srai>TESLA</srai></template></category>	
+	<category><pattern>_ ТЕСЛА</pattern><template><srai>TESLA</srai></template></category>	
+	<category><pattern>_ TESLA</pattern><template><srai>TESLA</srai></template></category>
+
+	<category><pattern>ДОПОЛНИТЕЛЬНО</pattern><template><srai>ДОПОЛНИТЕЛЬНЫЙ ФАКТ</srai></template></category>
+	<category><pattern>ЧТО ЕЩЕ</pattern><template><srai>ДОПОЛНИТЕЛЬНЫЙ ФАКТ</srai></template></category>
+	<category><pattern>ЧТО ЕЩЕ _</pattern><template><srai>ДОПОЛНИТЕЛЬНЫЙ ФАКТ</srai></template></category>
+	<category><pattern>РАССКАЖИ ЕЩЕ</pattern><template><srai>ДОПОЛНИТЕЛЬНЫЙ ФАКТ</srai></template></category>
+	<category><pattern>ЕЩЕ ФАКТ</pattern><template><srai>ДОПОЛНИТЕЛЬНЫЙ ФАКТ</srai></template></category>
+	<category><pattern>ДАЛЕЕ</pattern><template><srai>ДОПОЛНИТЕЛЬНЫЙ ФАКТ</srai></template></category>
+
+	<category>
+		<pattern>ДОПОЛНИТЕЛЬНЫЙ ФАКТ</pattern>
+		<template>
+			<condition name="last_car">
+				<li value="unknown">
+					Мы ещё не выбрали марку. Спроси: "Что такое Tesla?" или "Какие марки ты знаешь?", <get name="username"/>.
+				</li>
+
+				<li value="Citroen">Ещё факт о Citroen: 2CV задумывали так, чтобы по полю можно было везти корзину яиц и не разбить их — поэтому подвеска была максимально мягкой.</li>
+				<li value="Chevrolet">Ещё о Chevrolet: Corvette стал легендой не только из-за скорости, но и из-за “народной мечты” — спортивный автомобиль за относительно доступные деньги (по меркам спорткаров).</li>
+				<li value="Dodge">Ещё о Dodge: марка стала символом “американского мускула” — мощные моторы и прямолинейный характер часто важнее рациональности.</li>
+				<li value="Hyundai">Интересно о Hyundai: они сильно инвестировали в гарантию и качество — это помогло быстро изменить репутацию и выйти в лидеры массового сегмента.</li>
+				<li value="Lada">Другой факт о Lada: простая конструкция — это сознательная философия, поэтому многие ремонты делаются “в гаражных условиях”.</li>
+				<li value="Mitsubishi">Дополнение о Mitsubishi: у марки очень сильная школа полного привода и внедорожной техники — отсюда культ Pajero и спортивные версии Lancer.</li>
+				<li value="Maserati">Ещё о Maserati: у бренда особый “итальянский” подход — важны не только цифры, но и звук, дизайн, ощущение роскоши.</li>
+				<li value="Opel">Интересный факт об Opel: у них много массовых моделей, которые становились “первой машиной” для целых поколений европейцев.</li>
+				<li value="Renault">Дополнение о Renault: французы любят смелые компоновки и “умные” городские решения — поэтому у марки много удобных машин для повседневности.</li>
+				<li value="Tesla">Ещё о Tesla: их сильная сторона — софт и обновления “по воздуху”, из-за чего машина может заметно меняться даже после покупки.</li>
+
+				<li>
+					Могу продолжать про <get name="last_car"/>, или переключимся на другую марку?
+				</li>
+			</condition>
+		</template>
+	</category>
+
+	<category>
+		<pattern>АНЕКДОТ</pattern>
+		<template>
+			<random>
+				<li>В России есть только один запрещающий знак — бетонный блок поперек дороги. Остальные — предупреждающие.</li>
+				<li>Навигатор сказал моему таксисту: «Круто поверните налево». А он повернул очень скучно. Что сложного в том, чтобы ехать по навигатору?</li>
+				<li>Водитель «БелАЗа» смотрит на дорожные знаки чисто из любопытства.</li>
+				<li>Женщина за рулем — это не обезьяна с гранатой, а «спасибо, милая, что я сегодня могу выпить в гостях».</li>
+				<li>
+					В старом фильме «Гостья из будущего» космические пираты предлагали
+					мальчику Коле новые «Жигули» за информацию о миелофоне. Но парень уже тогда понимал, что к чему, и ответил: «Лучше сразу убейте».
+				</li>
+				<li>Парни, которые поворачивают направо из левого крайнего ряда, помните: дома вас ждут ваши парни.</li>
+				<li>Если у машины с буквой «У» включились дворники, значит, она сейчас будет поворачивать.</li>
+				<li>Говорят, что искусственный интеллект никогда не сможет заменить человека. Ну и что, автомобиль тоже никогда не сможет заменить лошадь. Вы когда-нибудь пробовали перепрыгнуть на автомобиле через барьер?</li>
+				<li>Водитель «БелАЗа» смотрит на дорожные знаки чисто из любопытства.</li>
+				<li>
+					Программист вбегает в милицию:
+					— У меня автомобиль пропал!
+					— Опять вы! Да не пропал он никуда, стоит где оставили... Запомните, 404 — это его госномер!!!
+				</li>
+			</random>
+		</template>
+	</category>
+	
+	<category><pattern>_ АНЕКДОТ</pattern><template><srai>АНЕКДОТ</srai></template></category>
+	<category><pattern>АНЕКДОТИК</pattern><template><srai>АНЕКДОТ</srai></template></category>
+	<category><pattern>_ АНЕКДОТИК</pattern><template><srai>АНЕКДОТ</srai></template></category>
+	<category><pattern>_ СМЕШНОЕ</pattern><template><srai>АНЕКДОТ</srai></template></category>
+	<category><pattern>ШУТКУ</pattern><template><srai>АНЕКДОТ</srai></template></category>
+	<category><pattern>_ ШУТКУ</pattern><template><srai>АНЕКДОТ</srai></template></category>
+	
+	<category>
+		<pattern>Кря *</pattern>
+		<template>
+			<srai>Кря</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>_ Кря *</pattern>
+		<template>
+			<srai>Кря</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>_ Кря</pattern>
+		<template>
+			<srai>Кря</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Кря</pattern>
+		<template>
+			<random>
+				<li>Кря</li>
+				<li>Кря Кря</li>
+				<li>Кря Кря Кря</li>
+				<li>Кря!</li>
+				<li>Кря Кря!</li>
+				<li>Кря Кря Кря!</li>
+				<li>Кря?</li>
+				<li>Кря Кря?</li>
+				<li>Кря Кря Кря?</li>
+				<li>
+					Кря, <get name="user-name" />
+				</li>
+				<li>
+					Кря Кря, <get name="user-name" />
+				</li>
+				<li>
+					Кря Кря Кря, <get name="user-name" />
+				</li>
+				<li>
+					Кря, <get name="user-name" />!
+				</li>
+				<li>
+					Кря Кря, <get name="user-name" />!
+				</li>
+				<li>
+					Кря Кря Кря, <get name="user-name" />!
+				</li>
+				<li>
+					Кря, <get name="user-name" />?
+				</li>
+				<li>
+					Кря Кря, <get name="user-name" />?
+				</li>
+				<li>
+					Кря Кря Кря, <get name="user-name" />?
+				</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Аудио</pattern>
+		<template>Жаль, я не умею слушать</template>
+	</category>
+	<category>
+		<pattern>Видео</pattern>
+		<template>Спасибо, но, кажется, у меня сломалась кнопка запуска</template>
+	</category>
+
+	<category>
+		<pattern>*</pattern>
+		<template>
+			<random>
+				<li>Ничего не понял, но очень интересно.</li>
+				<li>Ошибка 404: смысл не найден.</li>
+				<li>Ээээ... Этого я не знаю.</li>
+				<li>Не понял.</li>
+			</random>
+		</template>
+	</category>
+</aiml>
